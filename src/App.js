@@ -40,8 +40,8 @@ const App = () => {
 						level={5}
 						style={{ color: "white", textAlign: "center" }}
 					>
-						Cryptoverse <br />
-						All Rights Reserved
+						CryptoRods <br />
+						Made by Rodolpho Becker
 					</Typography.Title>
 					<Space>
 						<Link to="/">Home</Link>
