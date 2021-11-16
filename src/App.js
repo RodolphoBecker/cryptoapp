@@ -21,7 +21,7 @@ const App = () => {
 			</div>
 			<div className="main">
 				<Layout>
-					<div className="routes">
+					<div className="routes container">
 						<Routes>
 							<Route exact path="/" element={<HomePage />} />
 							<Route exact path="/exchanges" element={<Exchanges />} />

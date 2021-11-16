@@ -33,7 +33,11 @@ a:hover{
     
 }
 .routes{
-    padding: 20px;
+    padding: 0;
+}
+.container {
+    padding: 40px;
+    padding-top: 20px;
 }
 .nav-container{
     position: fixed;
@@ -355,9 +359,9 @@ width: 70%;
     margin: 20px auto 30px auto;
     width: 250px;
 }
-.crypto-card-container{
+/* .crypto-card-container{
     min-height: 65vh !important;
-}
+} */
 .crypto-card{
     min-width: 250px;
 }
