@@ -118,8 +118,8 @@ const CryptoDetails = () => {
 							An overview showing the stats of {cryptoDetails.name}
 						</p>
 					</Col>
-					{stats.map(({ icon, title, value }) => (
-						<Col className="coin-stats">
+					{stats.map(({ icon, title, value, i }) => (
+						<Col key={i} className="coin-stats">
 							<Col className="coin-stats-name">
 								<Text>{icon}</Text>
 								<Text>{title}</Text>
@@ -137,8 +137,8 @@ const CryptoDetails = () => {
 							An overview showing the stats of all cryptocurrencies
 						</p>
 					</Col>
-					{genericStats.map(({ icon, title, value }) => (
-						<Col className="coin-stats">
+					{genericStats.map(({ icon, title, value, i }) => (
+						<Col key={i} className="coin-stats">
 							<Col className="coin-stats-name">
 								<Text>{icon}</Text>
 								<Text>{title}</Text>
@@ -159,8 +159,8 @@ const CryptoDetails = () => {
 					<Title level={3} className="coin-details-heading">
 						{cryptoDetails.name} Links
 					</Title>
-					{cryptoDetails.links.map((link) => (
-						<Row className="coin-link" key={link.name}>
+					{cryptoDetails.links.map((link, i) => (
+						<Row key={i} className="coin-link" key={link.name}>
 							<Title level={5} className="link-name">
 								{link.type}
 							</Title>

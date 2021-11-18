@@ -27,12 +27,14 @@ const Cryptocurrencies = ({ simplified }) => {
 			{simplified ? (
 				<></>
 			) : (
-				<div className="search-crypto">
-					<Input
-						placeholder="Search Cryptocurrency"
-						onChange={(e) => setSearchTerm(e.target.value)}
-					/>
-				</div>
+				<Row gutter={[32, 32]} className="search-crypto" style={{ marginBottom: "30px" }}>
+					<Col xs={24} sm={12} lg={6}>
+						<Input
+							placeholder="Search Cryptocurrency"
+							onChange={(e) => setSearchTerm(e.target.value)}
+						/>
+					</Col>
+				</Row>
 			)}
 			<div className="cointainer">
 				<Row gutter={[32, 32]} className="crypto-card-container">
@@ -52,6 +54,7 @@ const Cryptocurrencies = ({ simplified }) => {
 											className="crypto-image"
 											style={{ maxHeight: "25px" }}
 											src={currency.iconUrl}
+											alt="cryptoImage"
 										/>
 									}
 									hoverable
