@@ -15,8 +15,12 @@ import {
 	ThunderboltOutlined,
 } from "@ant-design/icons";
 
-import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from "../../services/cryptoAPI";
-import { LineChart, Loading } from '../';
+import {
+	useGetCryptoDetailsQuery,
+	useGetCryptoHistoryQuery,
+} from "../../services/cryptoAPI";
+import { useGetCoinExchangeQuery } from "../../services/coinExchangeAPI";
+import { LineChart, Loading } from "../";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -24,11 +28,19 @@ const { Option } = Select;
 const CryptoDetails = () => {
 	const { coinId } = useParams();
 	const [timePeriod, setTimePeriod] = useState("7d");
+
 	const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
-	const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timePeriod });
+	const { data: coinHistory } = useGetCryptoHistoryQuery({
+		coinId,
+		timePeriod,
+	});
+	const { data: coinConversion } = useGetCoinExchangeQuery();
+
 	const cryptoDetails = data?.data?.coin;
 
-	if(isFetching) return <Loading />
+	const convertBRL = parseFloat(coinConversion?.USDBRL?.bid);
+
+	if (isFetching) return <Loading />;
 
 	const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -36,6 +48,14 @@ const CryptoDetails = () => {
 		{
 			title: "Price to USD",
 			value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
+			icon: <DollarCircleOutlined />,
+		},
+		{
+			title: "Price to BRL",
+			value: `R$ ${
+				(parseFloat(cryptoDetails.price) && millify(parseFloat(cryptoDetails.price))) *
+				convertBRL
+			}`,
 			icon: <DollarCircleOutlined />,
 		},
 		{ title: "Rank", value: cryptoDetails.rank, icon: <NumberOutlined /> },
@@ -105,18 +125,22 @@ const CryptoDetails = () => {
 				placeholder="Select Time Period"
 				onChange={(value) => setTimePeriod(value)}
 			>
-				{time.map((date) => <Option key={date}>{date}</Option>)}
+				{time.map((date) => (
+					<Option key={date}>{date}</Option>
+				))}
 			</Select>
-			<LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />
+			<LineChart
+				coinHistory={coinHistory}
+				currentPrice={millify(cryptoDetails.price)}
+				coinName={cryptoDetails.name}
+			/>
 			<Col className="stats-container">
 				<Col className="coin-value-statistics">
 					<Col className="coin-value-statistics-heading">
 						<Title level={3} className="coin-details-heading">
 							{cryptoDetails.name} Value Statistics
 						</Title>
-						<p>
-							An overview showing the stats of {cryptoDetails.name}
-						</p>
+						<p>An overview showing the stats of {cryptoDetails.name}</p>
 					</Col>
 					{stats.map(({ icon, title, value, i }) => (
 						<Col key={i} className="coin-stats">
@@ -133,9 +157,7 @@ const CryptoDetails = () => {
 						<Title level={3} className="coin-details-heading">
 							Other Coins Statistics
 						</Title>
-						<p>
-							An overview showing the stats of all cryptocurrencies
-						</p>
+						<p>An overview showing the stats of all cryptocurrencies</p>
 					</Col>
 					{genericStats.map(({ icon, title, value, i }) => (
 						<Col key={i} className="coin-stats">
@@ -164,7 +186,9 @@ const CryptoDetails = () => {
 							<Title level={5} className="link-name">
 								{link.type}
 							</Title>
-							<a href={link.url} target="_blank" rel="noreferrer">{link.name}</a>
+							<a href={link.url} target="_blank" rel="noreferrer">
+								{link.name}
+							</a>
 						</Row>
 					))}
 				</Col>
