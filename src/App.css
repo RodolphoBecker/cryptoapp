@@ -395,3 +395,7 @@ a:hover {
 .ant-layout-header {
 	background: rgb(0, 21, 41) !important;
 }
+.default-container {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}

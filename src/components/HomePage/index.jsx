@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Row, Col, Statistic } from "antd";
+import { Typography, Row, Col, Statistic, Button } from "antd";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
-import millify from "millify";
 import { Cryptocurrencies, News, Loading } from "../";
+
+import millify from "millify";
+import ButtonLink from "../Buttons/ButtonLink";
 
 const { Title } = Typography;
 
@@ -52,18 +54,14 @@ const HomePage = () => {
 				<Title level={2} className="home-title">
 					Top 10 Cryptocurrencies in the World
 				</Title>
-				<Title level={3} className="show-more">
-					<Link to="/cryptocurrencies">Show More</Link>
-				</Title>
+				<ButtonLink path="/cryptocurrencies" text="SHOW MORE" />
 			</div>
 			<Cryptocurrencies simplified />
 			<div className="home-heading-container">
 				<Title level={2} className="home-title">
 					Latest Crypto News
 				</Title>
-				<Title level={3} className="show-more">
-					<Link to="/news">Show More</Link>
-				</Title>
+				<ButtonLink path="/news" text="SHOW MORE" />
 			</div>
 			<News simplified />
 		</>
