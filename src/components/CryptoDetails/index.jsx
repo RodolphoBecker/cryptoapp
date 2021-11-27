@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import millify from "millify";
 import { Col, Row, Typography, Select } from "antd";
 import {
 	MoneyCollectOutlined,
@@ -21,6 +20,7 @@ import {
 } from "../../services/cryptoAPI";
 import { useGetCoinExchangeQuery } from "../../services/coinExchangeAPI";
 import { LineChart, Loading } from "../";
+import millify from "millify";
 
 const { Title, Text } = Typography;
 const { Option } = Select;

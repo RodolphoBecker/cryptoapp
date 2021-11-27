@@ -389,8 +389,8 @@ a:hover {
 .site-layout .site-layout-background {
 	background: #fff;
 }
-.navbar>div {
-    height: 100% !important;
+.navbar > div {
+	height: 100% !important;
 }
 .ant-layout-header {
 	background: rgb(0, 21, 41) !important;
@@ -398,4 +398,22 @@ a:hover {
 .default-container {
 	margin-top: 50px;
 	margin-bottom: 50px;
+}
+.section-title {
+	text-transform: uppercase;
+	border-bottom: 5px solid #1890ff;
+	display: inline-block;
+}
+.cardDefault-body {
+	text-align: center;
+	border: 1px solid black;
+	padding: 20px;
+	border-radius: 20px;
+}
+.statsCard-container {
+	margin-bottom: 50px;
+}
+
+.statsCard-container:last-child {
+	margin-bottom: 0;
 }
