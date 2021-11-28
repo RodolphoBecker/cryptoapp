@@ -62,7 +62,7 @@ const HomePage = () => {
 								className="statsCard-container"
 								xs={24}
 								sm={12}
-								lg={5}
+								lg={4}
 								key={i}
 							>
 								<CardDefault title={stat.title} value={stat.value} background={stat.background} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Card, Row, Col, Input } from "antd";
+import { Card, Row, Col, Input, Popover, Button } from "antd";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
 import millify from "millify";
 import { Loading } from "..";
@@ -27,7 +27,11 @@ const Cryptocurrencies = ({ simplified }) => {
 			{simplified ? (
 				<></>
 			) : (
-				<Row gutter={[32, 32]} className="search-crypto" style={{ marginBottom: "30px" }}>
+				<Row
+					gutter={[32, 32]}
+					className="search-crypto"
+					style={{ marginBottom: "30px" }}
+				>
 					<Col xs={24} sm={12} lg={6}>
 						<Input
 							placeholder="Search Cryptocurrency"
@@ -37,32 +41,38 @@ const Cryptocurrencies = ({ simplified }) => {
 				</Row>
 			)}
 			<div className="cointainer">
-				<Row gutter={[32, 32]} className="crypto-card-container default-container">
+				<Row
+					gutter={[32, 32]}
+					className="crypto-card-container default-container"
+				>
 					{cryptos?.map((currency) => (
 						<Col
 							xs={24}
 							sm={12}
-							lg={6}
+							lg={4}
 							className="crypto-card"
+							style={{ textAlign: 'center' }}
 							key={currency.id}
-						>
+						>							
 							<Link to={`/crypto/${currency.id}`}>
-								<Card
-									title={`${currency.rank}. ${currency.name}`}
-									extra={
-										<img
-											className="crypto-image"
-											style={{ maxHeight: "25px" }}
-											src={currency.iconUrl}
-											alt="cryptoImage"
-										/>
+								<Popover
+									content={
+										<div>
+											<p>Price: ${millify(currency.price)}</p>
+											<p>Market Cap: ${millify(currency.marketCap)}</p>
+											<p>Daily Change: {millify(currency.change)}%</p>
+										</div>
 									}
-									hoverable
+									title={`${currency.rank}. ${currency.name}`}
 								>
-									<p>Price: ${millify(currency.price)}</p>
-									<p>Market Cap: ${millify(currency.marketCap)}</p>
-									<p>Daily Change: {millify(currency.change)}%</p>
-								</Card>
+									<img
+										className="crypto-image"
+										style={{ width: "50px" }}
+										src={currency.iconUrl}
+										alt="cryptoImage"
+									/>
+								</Popover>
+								<p className="card-title">{`${currency.rank}. ${currency.name}`}</p>
 							</Link>
 						</Col>
 					))}
