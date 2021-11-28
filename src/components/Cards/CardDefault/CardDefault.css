@@ -85,7 +85,8 @@ body {
 .card__title {
 	font-size: 1.2rem;
 	margin: 0 0 0.3em;
-	color: #6a515e;
+	/* color: #6a515e; */
+	color: #001529;
 }
 
 .card__tagline {
@@ -104,9 +105,10 @@ body {
 .card__description {
 	padding: 0 2em 2em;
 	margin: 0;
-	color: #d7bdca;
+	color: #001529;
 	font-family: "MockFlowFont";
     font-size: 2rem;
+	font-weight: bold;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;

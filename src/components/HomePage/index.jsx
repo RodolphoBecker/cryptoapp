@@ -7,6 +7,11 @@ import { Cryptocurrencies, News, Loading } from "../";
 import ButtonLink from "../Buttons/ButtonLink";
 import CardDefault from "../Cards/CardDefault";
 
+import ExchangesBackground from "../../images/background-exchanges.jpg";
+import MarketCapBackground from "../../images/background-marketCap.jpg"
+import VolumeBackground from "../../images/background-volume.jpg"
+import MarketsBackground from "../../images/background-markets.jpg"
+
 const { Title } = Typography;
 
 const HomePage = () => {
@@ -21,27 +26,27 @@ const HomePage = () => {
 			{
 				title: "Total Cryptocurrencies",
 				value: globalStats.total,
-				background: "https://i.imgur.com/oYiTqum.jpg"
+				background: ExchangesBackground
 			},
 			{
 				title: "Total Exchanges",
 				value: globalStats.totalExchanges,
-				background: "https://i.imgur.com/oYiTqum.jpg"
+				background: ExchangesBackground
 			},
 			{
 				title: "Total Market Cap",
 				value: globalStats.totalMarketCap,
-				background: "https://i.imgur.com/oYiTqum.jpg"
+				background: MarketCapBackground
 			},
 			{
 				title: "Total 24h Volume",
 				value: globalStats.total24hVolume,
-				background: "https://i.imgur.com/oYiTqum.jpg"
+				background: VolumeBackground
 			},
 			{
 				title: "Total Markets",
 				value: globalStats.totalMarkets,
-				background: "https://i.imgur.com/oYiTqum.jpg"
+				background: MarketsBackground
 			},
 		];
 
