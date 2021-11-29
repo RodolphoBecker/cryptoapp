@@ -365,19 +365,17 @@ a:hover {
 	min-width: 250px;
 }
 .crypto-card .crypto-image {
-	width: 35px;
+	max-width: 50px;
+	max-height: 50px;
 }
 .select-timeperiod {
 	width: 200px !important;
 	margin-top: 20px !important;
 }
 
-.footer {
+.footer-style {
 	background-color: #001529;
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
-	align-items: center;
+	text-align: center;
 }
 
 #components-layout-demo-side .logo {

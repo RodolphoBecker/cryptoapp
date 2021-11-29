@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Avatar } from "antd";
 import {
@@ -11,39 +11,62 @@ import icon from "../../images/cryptocurrency.png";
 
 const { Sider } = Layout;
 
-class Navbar extends React.Component {
-	state = {
-		collapsed: true,
+const Navbar = () => {
+	const [menuCollapse, setMenuCollapse] = useState(false);
+	const [scrollPosition, setScrollPosition] = useState(0);
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
+	useEffect(() => {
+		if(scrollPosition >= 150){
+			setMenuCollapse(true)
+		}
+
+		if(scrollPosition === 0){
+			setMenuCollapse(false)
+		}
+	},[scrollPosition])
+
+	const handleScroll = () => {
+		const position = window.pageYOffset;
+		setScrollPosition(position);
 	};
 
-	onCollapse = (collapsed) => {
-		this.setState({ collapsed });
+	const onCollapse = () => {
+		if (menuCollapse === true) {
+			setMenuCollapse(false);
+		} else {
+			setMenuCollapse(true);
+		}
 	};
 
-	render() {
-		const { collapsed } = this.state;
-		return (
-			<Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-				<div style={{ textAlign: 'center', margin: '10px 0 10px 0' }}>
-					<Avatar src={icon} size="large" />
-				</div>
-				<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-					<Menu.Item key="1" icon={<HomeOutlined />}>
-						<Link to="/">Home</Link>
-					</Menu.Item>
-					<Menu.Item key="2" icon={<FundOutlined />}>
-						<Link to="/cryptocurrencies">Cryptocurrencies</Link>
-					</Menu.Item>
-					<Menu.Item key="3" icon={<MoneyCollectOutlined />}>
-						<Link to="/exchanges">Exchanges</Link>
-					</Menu.Item>
-					<Menu.Item key="4" icon={<BulbOutlined />}>
-						<Link to="/news">News</Link>
-					</Menu.Item>
-				</Menu>
-			</Sider>
-		);
-	}
-}
+	return (
+		<Sider collapsible collapsed={menuCollapse} onCollapse={onCollapse}>
+			<div style={{ textAlign: "center", margin: "10px 0 10px 0" }}>
+				<Avatar src={icon} size="large" />
+			</div>
+			<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+				<Menu.Item key="1" icon={<HomeOutlined />}>
+					<Link to="/">Home</Link>
+				</Menu.Item>
+				<Menu.Item key="2" icon={<FundOutlined />}>
+					<Link to="/cryptocurrencies">Cryptocurrencies</Link>
+				</Menu.Item>
+				<Menu.Item key="3" icon={<MoneyCollectOutlined />}>
+					<Link to="/exchanges">Exchanges</Link>
+				</Menu.Item>
+				<Menu.Item key="4" icon={<BulbOutlined />}>
+					<Link to="/news">News</Link>
+				</Menu.Item>
+			</Menu>
+		</Sider>
+	);
+};
 
 export default Navbar;

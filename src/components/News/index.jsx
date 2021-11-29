@@ -26,28 +26,35 @@ const News = ({ simplified }) => {
 	return (
 		<>
 			{!simplified && (
-				<Row gutter={[24, 24]} style={{ marginBottom: '30px' }}>
-					<Col xs={24} sm={12} lg={8}>
-						<Select
-							showSearch
-							className="select-news"
-							placeholder="Select a Crypto"
-							optionFilterProp="children"
-							onChange={(value) => setNewsCategory(value)}
-							filterOption={(input, option) =>
-								option.children
-									.toLowerCase()
-									.indexOf(input.toLocaleLowerCase()) >= 0
-							}
-							style={{ width: '100%' }}
-						>
-							<Option value="Cryptocurrency">Cryptocurrency</Option>
-							{data?.data?.coins.map((coin) => (
-								<Option value={coin.name}>{coin.name}</Option>
-							))}
-						</Select>
-					</Col>
-				</Row>
+				<>
+					<Row style={{ marginBottom: "30px" }}>
+						<Title level={2} className="heading section-title">
+							News
+						</Title>
+					</Row>
+					<Row gutter={[24, 24]} style={{ marginBottom: "30px" }}>
+						<Col xs={24} sm={12} lg={8}>
+							<Select
+								showSearch
+								className="select-news"
+								placeholder="Select a Crypto"
+								optionFilterProp="children"
+								onChange={(value) => setNewsCategory(value)}
+								filterOption={(input, option) =>
+									option.children
+										.toLowerCase()
+										.indexOf(input.toLocaleLowerCase()) >= 0
+								}
+								style={{ width: "100%" }}
+							>
+								<Option value="Cryptocurrency">Cryptocurrency</Option>
+								{data?.data?.coins.map((coin) => (
+									<Option value={coin.name}>{coin.name}</Option>
+								))}
+							</Select>
+						</Col>
+					</Row>
+				</>
 			)}
 			<Row gutter={[24, 24]} className="default-container">
 				{cryptoNews.value.map((news, i) => (

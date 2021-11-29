@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Card, Row, Col, Input, Popover, Button } from "antd";
+import { Row, Col, Input, Popover, Typography } from "antd";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
 import millify from "millify";
 import { Loading } from "..";
+
+const { Title } = Typography;
 
 const Cryptocurrencies = ({ simplified }) => {
 	const count = simplified ? 10 : 100;
@@ -27,18 +29,25 @@ const Cryptocurrencies = ({ simplified }) => {
 			{simplified ? (
 				<></>
 			) : (
-				<Row
-					gutter={[32, 32]}
-					className="search-crypto"
-					style={{ marginBottom: "30px" }}
-				>
-					<Col xs={24} sm={12} lg={6}>
-						<Input
-							placeholder="Search Cryptocurrency"
-							onChange={(e) => setSearchTerm(e.target.value)}
-						/>
-					</Col>
-				</Row>
+				<>
+					<Row style={{ marginBottom: "30px" }}>
+						<Title level={2} className="heading section-title">
+							Cryptocurrencies
+						</Title>
+					</Row>
+					<Row
+						gutter={[32, 32]}
+						className="search-crypto"
+						style={{ marginBottom: "30px" }}
+					>
+						<Col xs={24} sm={12} lg={6}>
+							<Input
+								placeholder="Search Cryptocurrency"
+								onChange={(e) => setSearchTerm(e.target.value)}
+							/>
+						</Col>
+					</Row>
+				</>
 			)}
 			<div className="cointainer">
 				<Row
@@ -51,9 +60,9 @@ const Cryptocurrencies = ({ simplified }) => {
 							sm={12}
 							lg={4}
 							className="crypto-card"
-							style={{ textAlign: 'center' }}
+							style={{ textAlign: "center" }}
 							key={currency.id}
-						>							
+						>
 							<Link to={`/crypto/${currency.id}`}>
 								<Popover
 									content={
@@ -67,7 +76,6 @@ const Cryptocurrencies = ({ simplified }) => {
 								>
 									<img
 										className="crypto-image"
-										style={{ width: "50px" }}
 										src={currency.iconUrl}
 										alt="cryptoImage"
 									/>
