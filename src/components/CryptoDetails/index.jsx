@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { Col, Row, Typography, Select, Button } from "antd";
+import { Col, Row, Typography, Select, Button, Tag } from "antd";
 import {
 	MoneyCollectOutlined,
 	DollarCircleOutlined,
@@ -12,6 +12,7 @@ import {
 	CheckOutlined,
 	NumberOutlined,
 	ThunderboltOutlined,
+	BankOutlined
 } from "@ant-design/icons";
 
 import {
@@ -46,20 +47,6 @@ const CryptoDetails = () => {
 
 	const stats = [
 		{
-			title: "Price to USD",
-			value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
-			icon: <DollarCircleOutlined />,
-		},
-		{
-			title: "Price to BRL",
-			value: `R$ ${
-				(parseFloat(cryptoDetails.price) &&
-					millify(parseFloat(cryptoDetails.price))) * convertBRL
-			}`,
-			icon: <DollarCircleOutlined />,
-		},
-		{ title: "Rank", value: cryptoDetails.rank, icon: <NumberOutlined /> },
-		{
 			title: "24h Volume",
 			value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`,
 			icon: <ThunderboltOutlined />,
@@ -73,6 +60,16 @@ const CryptoDetails = () => {
 			title: "All-time-high(daily avg.)",
 			value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`,
 			icon: <TrophyOutlined />,
+		},
+		{
+			title: "Exchanges",
+			value: `${cryptoDetails.numberOfExchanges}`,
+			icon: <BankOutlined />,
+		},
+		{
+			title: "Markets",
+			value: `${millify(cryptoDetails.numberOfMarkets)}`,
+			icon: <NumberOutlined />,
 		},
 	];
 
@@ -108,16 +105,40 @@ const CryptoDetails = () => {
 		},
 	];
 
+	console.log({ cryptoDetails });
+
 	return (
-		<Col className="coin-detail-container">
-			<Col className="coin-heading-container default-container">
-				<Title level={2} className="coin-name">
-					{cryptoDetails.name} ({cryptoDetails.slug}) Price
-				</Title>
-				<p>
-					{cryptoDetails.name} live price in US Dollars. View value statistics,
-					market cap and supply.
-				</p>
+		<Col>
+			<Col className="default-container" style={{ marginTop: "0" }}>
+				<Tag>{`Rank #${cryptoDetails.rank}`}</Tag>
+				<Row align="middle" style={{ marginTop: "15px" }}>
+					<img
+						src={cryptoDetails.iconUrl}
+						alt="cryptoImage"
+						style={{ width: "30px" }}
+					/>
+					<div>
+						<Title level={3} style={{ marginBottom: "0", marginLeft: "10px" }}>
+							{`${cryptoDetails.name} (${cryptoDetails.symbol.toLowerCase()})`}
+						</Title>
+					</div>
+				</Row>
+				<Row style={{ margin: "15px 0" }}>
+					<Title level={2} style={{ marginBottom: "0" }}>
+						{`US$ ${millify(cryptoDetails.price)}`}
+					</Title>
+				</Row>
+				<Row justify="space-between coin-stats-general" style={{ width: "100%" }}>
+					{stats.map(({ icon, title, value, i }) => (
+						<Col key={i} className="coin-stats">
+							<Col className="coin-stats-name">
+								<Text>{icon}</Text>
+								<Text>{title}</Text>
+							</Col>
+							<Text className="stats">{value}</Text>
+						</Col>
+					))}
+				</Row>
 			</Col>
 			{time.map((period, i) => (
 				<Button key={i} onClick={() => setTimePeriod(period)}>
@@ -129,7 +150,7 @@ const CryptoDetails = () => {
 				currentPrice={millify(cryptoDetails.price)}
 				coinName={cryptoDetails.name}
 			/>
-			<Col className="stats-container default-container">
+			{/* <Col className="stats-container default-container">
 				<Col className="coin-value-statistics">
 					<Col className="coin-value-statistics-heading">
 						<Title level={3} className="coin-details-heading">
@@ -164,7 +185,7 @@ const CryptoDetails = () => {
 						</Col>
 					))}
 				</Col>
-			</Col>
+			</Col> */}
 			<Col className="coin-desc-link">
 				<Row className="coin-desc">
 					<Title level={3} className="coin-details-heading">
