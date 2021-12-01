@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { Col, Row, Typography, Select, Collapse  } from "antd";
+import { Col, Row, Typography, Select, Button } from "antd";
 import {
 	MoneyCollectOutlined,
 	DollarCircleOutlined,
@@ -24,7 +24,6 @@ import millify from "millify";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
-const { Panel } = Collapse;
 
 const CryptoDetails = () => {
 	const { coinId } = useParams();
@@ -43,7 +42,7 @@ const CryptoDetails = () => {
 
 	if (isFetching) return <Loading />;
 
-	const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
+	const time = ["24h", "7d", "30d", "1y"];
 
 	const stats = [
 		{
@@ -54,8 +53,8 @@ const CryptoDetails = () => {
 		{
 			title: "Price to BRL",
 			value: `R$ ${
-				(parseFloat(cryptoDetails.price) && millify(parseFloat(cryptoDetails.price))) *
-				convertBRL
+				(parseFloat(cryptoDetails.price) &&
+					millify(parseFloat(cryptoDetails.price))) * convertBRL
 			}`,
 			icon: <DollarCircleOutlined />,
 		},
@@ -109,11 +108,9 @@ const CryptoDetails = () => {
 		},
 	];
 
-	console.log({cryptoDetails})
-
 	return (
 		<Col className="coin-detail-container">
-			<Col className="coin-heading-container">
+			<Col className="coin-heading-container default-container">
 				<Title level={2} className="coin-name">
 					{cryptoDetails.name} ({cryptoDetails.slug}) Price
 				</Title>
@@ -122,22 +119,17 @@ const CryptoDetails = () => {
 					market cap and supply.
 				</p>
 			</Col>
-			<Select
-				defaultValue="7d"
-				className="select-timeperiod"
-				placeholder="Select Time Period"
-				onChange={(value) => setTimePeriod(value)}
-			>
-				{time.map((date) => (
-					<Option key={date}>{date}</Option>
-				))}
-			</Select>
+			{time.map((period, i) => (
+				<Button key={i} onClick={() => setTimePeriod(period)}>
+					{period}
+				</Button>
+			))}
 			<LineChart
 				coinHistory={coinHistory}
 				currentPrice={millify(cryptoDetails.price)}
 				coinName={cryptoDetails.name}
 			/>
-			<Col className="stats-container">
+			<Col className="stats-container default-container">
 				<Col className="coin-value-statistics">
 					<Col className="coin-value-statistics-heading">
 						<Title level={3} className="coin-details-heading">
