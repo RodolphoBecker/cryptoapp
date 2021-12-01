@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { Col, Row, Typography, Select } from "antd";
+import { Col, Row, Typography, Select, Collapse  } from "antd";
 import {
 	MoneyCollectOutlined,
 	DollarCircleOutlined,
@@ -24,6 +24,7 @@ import millify from "millify";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
+const { Panel } = Collapse;
 
 const CryptoDetails = () => {
 	const { coinId } = useParams();
@@ -107,6 +108,8 @@ const CryptoDetails = () => {
 			icon: <ExclamationCircleOutlined />,
 		},
 	];
+
+	console.log({cryptoDetails})
 
 	return (
 		<Col className="coin-detail-container">

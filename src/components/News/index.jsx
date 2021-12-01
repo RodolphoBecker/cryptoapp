@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 import { Select, Typography, Row, Col, Avatar, Card } from "antd";
-import moment from "moment";
-
 import { useGetCryptosNewsQuery } from "../../services/cryptoNewsAPI";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
 import { Loading } from "..";
+
+import { CardNews } from "../";
+import moment from "moment";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -17,7 +18,7 @@ const News = ({ simplified }) => {
 	const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
 	const { data: cryptoNews } = useGetCryptosNewsQuery({
 		newsCategory,
-		count: simplified ? 6 : 12,
+		count: simplified ? 5 : 12,
 	});
 	const { data } = useGetCryptosQuery(100);
 
@@ -56,10 +57,25 @@ const News = ({ simplified }) => {
 					</Row>
 				</>
 			)}
-			<Row gutter={[24, 24]} className="default-container">
+			<Row
+				gutter={[12, 50]}
+				justify="space-between"
+				className="default-container"
+			>
 				{cryptoNews.value.map((news, i) => (
-					<Col xs={24} sm={12} lg={8} key={i}>
-						<Card hoverable className="news-card">
+					<Col xs={24} sm={12} lg={4} key={i}>
+						<CardNews
+							url={news.url}
+							title={news.name}
+							image={news?.image?.thumbnail?.contentUrl || demoImage}
+							description={news.description}
+							publisher={
+								news.provider[0]?.image?.thumbnail?.contentUrl || demoImage
+							}
+							provider={news.provider[0]?.name}
+							date={news.datePublished}
+						/>
+						{/* <Card hoverable className="news-card">
 							<a href={news.url} target="_blank" rel="noreferrer">
 								<div className="news-image-container">
 									<Title className="news-title" level={4}>
@@ -94,7 +110,7 @@ const News = ({ simplified }) => {
 									</Text>
 								</div>
 							</a>
-						</Card>
+						</Card> */}
 					</Col>
 				))}
 			</Row>

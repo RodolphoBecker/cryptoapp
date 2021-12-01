@@ -1,0 +1,27 @@
+.cardNews-image {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 100px;
+}
+.cardNews-body {
+    transition: all ease .5s;
+    display: block;
+    height: 100%;
+}
+.cardNews-body:hover {
+    transition: all ease .5s;
+    opacity: 0.7;
+}
+.cardNews-description {
+    padding: 20px;
+    margin-top: -5px;
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.cardNews-publisher {
+    margin-top: 10px;
+}
+.cardNews-publisher-text {
+    font-size: 0.7rem;
+}
