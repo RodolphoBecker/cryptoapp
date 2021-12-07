@@ -5,5 +5,5 @@ export { default as Exchanges } from "./Exchanges";
 export { default as HomePage } from "./HomePage";
 export { default as News } from "./News";
 export { default as Loading } from "./Loading";
-export { default as LineChart } from "./LineChart";
+export { default as LineChart } from "./Graphics/LineChart";
 export { default as CardNews } from "./Cards/CardNews";

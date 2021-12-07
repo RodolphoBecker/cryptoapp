@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Avatar } from "antd";
 import {
@@ -13,30 +13,30 @@ const { Sider } = Layout;
 
 const Navbar = () => {
 	const [menuCollapse, setMenuCollapse] = useState(false);
-	const [scrollPosition, setScrollPosition] = useState(0);
+	// const [scrollPosition, setScrollPosition] = useState(0);
 
-	useEffect(() => {
-		window.addEventListener("scroll", handleScroll, { passive: true });
+	// useEffect(() => {
+	// 	window.addEventListener("scroll", handleScroll, { passive: true });
 		
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
+	// 	return () => {
+	// 		window.removeEventListener("scroll", handleScroll);
+	// 	};
+	// }, []);
 
-	useEffect(() => {
-		if(scrollPosition >= 150){
-			setMenuCollapse(true)
-		}
+	// useEffect(() => {
+	// 	if(scrollPosition >= 150){
+	// 		setMenuCollapse(true)
+	// 	}
 
-		if(scrollPosition === 0){
-			setMenuCollapse(false)
-		}
-	},[scrollPosition])
+	// 	if(scrollPosition === 0){
+	// 		setMenuCollapse(false)
+	// 	}
+	// },[scrollPosition])
 
-	const handleScroll = () => {
-		const position = window.pageYOffset;
-		setScrollPosition(position);
-	};
+	// const handleScroll = () => {
+	// 	const position = window.pageYOffset;
+	// 	setScrollPosition(position);
+	// };
 
 	const onCollapse = () => {
 		if (menuCollapse === true) {
