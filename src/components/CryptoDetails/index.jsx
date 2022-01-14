@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
 import { Col, Row, Typography, Select, Button, Tag } from "antd";
@@ -19,7 +19,7 @@ import {
 	useGetCryptoDetailsQuery,
 	useGetCryptoHistoryQuery,
 } from "../../services/cryptoAPI";
-import { useGetCoinExchangeQuery } from "../../services/coinExchangeAPI";
+// import { useGetCoinExchangeQuery } from "../../services/coinExchangeAPI";
 import { LineChart, Loading } from "../";
 import millify from "millify";
 
@@ -30,21 +30,21 @@ const CryptoDetails = () => {
 	const { coinId } = useParams();
 	const [timePeriod, setTimePeriod] = useState("7d");
 
+	const selectDateRangeRef = useRef(null)
+
 	const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
 	const { data: coinHistory } = useGetCryptoHistoryQuery({
 		coinId,
 		timePeriod,
 	});
-	const { data: coinConversion } = useGetCoinExchangeQuery();
-
-	const cryptoDetails = data?.data?.coin;
-
-	const convertBRL = parseFloat(coinConversion?.USDBRL?.bid);
+	// const { data: coinConversion } = useGetCoinExchangeQuery();
 
 	if (isFetching) return <Loading />;
 
-	const time = ["24h", "7d", "30d", "1y"];
+	const cryptoDetails = data?.data?.coin;
 
+	const time = ["24h", "7d", "30d", "1y"];
+	
 	const stats = [
 		{
 			title: "24h Volume",
@@ -85,7 +85,7 @@ const CryptoDetails = () => {
 			icon: <ExclamationCircleOutlined />,
 		},
 	];
-
+	
 	return (
 		<Col>
 			<Col className="default-container" style={{ marginTop: "0" }}>
@@ -122,10 +122,7 @@ const CryptoDetails = () => {
 							</Col>
 						))}
 					</Row>
-					<Row
-						justify="space-between"
-						style={{ width: "100%" }}
-					>
+					<Row justify="space-between" style={{ width: "100%" }}>
 						{genericStats.map(({ icon, title, value, i }) => (
 							<Col key={i} className="coin-stats coin-stats-generic">
 								<Col className="coin-stats-name">
@@ -139,7 +136,14 @@ const CryptoDetails = () => {
 				</div>
 			</Col>
 			{time.map((period, i) => (
-				<Button key={i} onClick={() => setTimePeriod(period)}>
+				<Button
+					ref={selectDateRangeRef}
+					key={i}
+					onClick={() => {
+						setTimePeriod(period);
+						console.log(selectDateRangeRef.current.textContent)
+					}}
+				>
 					{period}
 				</Button>
 			))}
