@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 
-import { Select, Typography, Row, Col, Avatar, Card } from "antd";
+import { Select, Typography, Row, Col } from "antd";
 import { useGetCryptosNewsQuery } from "../../services/cryptoNewsAPI";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
-import { Loading } from "..";
+import { CardNews, Loading } from "../../components";
 
-import { CardNews } from "../";
-import moment from "moment";
-
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const { Option } = Select;
 
 const demoImage =
@@ -75,42 +72,6 @@ const News = ({ simplified }) => {
 							provider={news.provider[0]?.name}
 							date={news.datePublished}
 						/>
-						{/* <Card hoverable className="news-card">
-							<a href={news.url} target="_blank" rel="noreferrer">
-								<div className="news-image-container">
-									<Title className="news-title" level={4}>
-										{news.name}
-									</Title>
-									<img
-										src={news?.image?.thumbnail?.contentUrl || demoImage}
-										alt="news"
-										style={{ maxWidth: "200px", maxHeight: "100px" }}
-									></img>
-								</div>
-								<p>
-									{news.description > 100
-										? `${news.description.substring(0, 100)}...`
-										: news.description}
-								</p>
-								<div className="provider-container">
-									<div>
-										<Avatar
-											src={
-												news.provider[0]?.image?.thumbnail?.contentUrl ||
-												demoImage
-											}
-											alt="news"
-										/>
-										<Text className="provider-name">
-											{news.provider[0]?.name}
-										</Text>
-									</div>
-									<Text>
-										{moment(news.datePublished).startOf("ss").fromNow()}
-									</Text>
-								</div>
-							</a>
-						</Card> */}
 					</Col>
 				))}
 			</Row>

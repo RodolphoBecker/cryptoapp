@@ -6,7 +6,7 @@ import moment from "moment";
 import "../CardNews/CardNews.css";
 
 const CardNews = (props) => {
-	const { url, title, image, description, publisher, provider, date } = props;
+	const { url, title, image, description, publisher, date } = props;
 	const { Title, Text } = Typography;
 
 	return (
@@ -24,7 +24,6 @@ const CardNews = (props) => {
 				<Row justify="space-between" align="middle" className="cardNews-publisher">
 					<div>
 						<Avatar size="large" src={publisher} alt="news" />
-						{/* <Text className="cardNews-publisher-text">{provider}</Text> */}
 					</div>
 					<Text className="cardNews-publisher-text">{moment(date).startOf("ss").fromNow()}</Text>
 				</Row>

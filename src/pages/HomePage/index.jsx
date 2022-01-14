@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Typography, Row, Col } from "antd";
-import { useGetCryptosQuery } from "../../services/cryptoAPI";
-import { Cryptocurrencies, News, Loading } from "../";
-
-import ButtonLink from "../Buttons/ButtonLink";
-import CardDefault from "../Cards/CardDefault";
-
+import ButtonLink from "../../components/Buttons/ButtonLink";
+import CardDefault from "../../components/Cards/CardDefault";
 import ExchangesBackground from "../../images/background-exchanges.jpg";
 import MarketCapBackground from "../../images/background-marketCap.jpg"
 import VolumeBackground from "../../images/background-volume.jpg"
 import MarketsBackground from "../../images/background-markets.jpg"
+
+import { Typography, Row, Col } from "antd";
+import { useGetCryptosQuery } from "../../services/cryptoAPI";
+import { Cryptocurrencies, Loading } from "../../components";
+import { News } from '../'
 
 const { Title } = Typography;
 

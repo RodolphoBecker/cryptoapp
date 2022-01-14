@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { Col, Row, Typography, Select, Button, Tag } from "antd";
+import { Col, Row, Typography, Button, Tag } from "antd";
 import {
-	MoneyCollectOutlined,
 	DollarCircleOutlined,
-	FundOutlined,
 	ExclamationCircleOutlined,
-	StopOutlined,
 	TrophyOutlined,
-	CheckOutlined,
 	NumberOutlined,
 	ThunderboltOutlined,
 	BankOutlined,
@@ -19,32 +15,30 @@ import {
 	useGetCryptoDetailsQuery,
 	useGetCryptoHistoryQuery,
 } from "../../services/cryptoAPI";
-// import { useGetCoinExchangeQuery } from "../../services/coinExchangeAPI";
+
 import { LineChart, Loading } from "../";
 import millify from "millify";
 
 const { Title, Text } = Typography;
-const { Option } = Select;
 
 const CryptoDetails = () => {
 	const { coinId } = useParams();
 	const [timePeriod, setTimePeriod] = useState("7d");
 
-	const selectDateRangeRef = useRef(null)
+	const selectDateRangeRef = useRef(null);
 
 	const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
 	const { data: coinHistory } = useGetCryptoHistoryQuery({
 		coinId,
 		timePeriod,
 	});
-	// const { data: coinConversion } = useGetCoinExchangeQuery();
 
 	if (isFetching) return <Loading />;
 
 	const cryptoDetails = data?.data?.coin;
 
 	const time = ["24h", "7d", "30d", "1y"];
-	
+
 	const stats = [
 		{
 			title: "24h Volume",
@@ -85,28 +79,35 @@ const CryptoDetails = () => {
 			icon: <ExclamationCircleOutlined />,
 		},
 	];
-	
+
 	return (
 		<Col>
 			<Col className="default-container" style={{ marginTop: "0" }}>
-				<Tag>{`Rank #${cryptoDetails.rank}`}</Tag>
-				<Row align="middle" style={{ marginTop: "15px" }}>
-					<img
-						src={cryptoDetails.iconUrl}
-						alt="cryptoImage"
-						style={{ width: "30px" }}
-					/>
-					<div>
-						<Title level={3} style={{ marginBottom: "0", marginLeft: "10px" }}>
-							{`${cryptoDetails.name} (${cryptoDetails.symbol.toLowerCase()})`}
+				<div>
+					<Tag>{`Rank #${cryptoDetails.rank}`}</Tag>
+					<Row align="middle" style={{ marginTop: "15px" }}>
+						<img
+							src={cryptoDetails.iconUrl}
+							alt="cryptoImage"
+							style={{ width: "30px" }}
+						/>
+						<div>
+							<Title
+								level={3}
+								style={{ marginBottom: "0", marginLeft: "10px" }}
+							>
+								{`${
+									cryptoDetails.name
+								} (${cryptoDetails.symbol.toLowerCase()})`}
+							</Title>
+						</div>
+					</Row>
+					<Row style={{ margin: "15px 0" }}>
+						<Title level={2} style={{ marginBottom: "0" }}>
+							{`US$ ${millify(cryptoDetails.price)}`}
 						</Title>
-					</div>
-				</Row>
-				<Row style={{ margin: "15px 0" }}>
-					<Title level={2} style={{ marginBottom: "0" }}>
-						{`US$ ${millify(cryptoDetails.price)}`}
-					</Title>
-				</Row>
+					</Row>
+				</div>
 				<div className="card-background">
 					<Row
 						justify="space-between coin-stats-general"
@@ -141,7 +142,7 @@ const CryptoDetails = () => {
 					key={i}
 					onClick={() => {
 						setTimePeriod(period);
-						console.log(selectDateRangeRef.current.textContent)
+						console.log(selectDateRangeRef.current.textContent);
 					}}
 				>
 					{period}
@@ -156,7 +157,7 @@ const CryptoDetails = () => {
 						{cryptoDetails.name} Links
 					</Title>
 					{cryptoDetails.links.map((link, i) => (
-						<Row key={i} className="coin-link" key={link.name}>
+						<Row className="coin-link" key={link.name}>
 							<Title level={5} className="link-name">
 								{link.type}
 							</Title>

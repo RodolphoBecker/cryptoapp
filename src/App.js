@@ -3,14 +3,11 @@ import { Layout, Avatar } from "antd";
 import { Routes, Route, Link } from "react-router-dom";
 import {
 	Navbar,
-	Exchanges,
-	HomePage,
-	Cryptocurrencies,
-	News,
 	CryptoDetails,
+	Cryptocurrencies
 } from "./components";
+import { Exchanges, News, HomePage } from './pages'
 import "./App.css";
-
 import icon from "../src/images/cryptocurrency.png";
 
 const { Header, Content, Footer } = Layout;
@@ -53,7 +50,7 @@ class App extends React.Component {
 						</Content>
 					</Layout>
 					<Footer style={{ textAlign: "center", backgroundColor: '#001529', color: 'white', padding: "13px 50px" }}>
-						Made by Rodolpho Becker
+						Made by a bunch of people
 					</Footer>
 				</Layout>
 			</Layout>

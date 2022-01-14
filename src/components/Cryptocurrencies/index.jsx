@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import { Row, Col, Input, Popover, Typography } from "antd";
 import { useGetCryptosQuery } from "../../services/cryptoAPI";
+import { Loading } from "../";
 import millify from "millify";
-import { Loading } from "..";
 
 const { Title } = Typography;
 
